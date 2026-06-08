@@ -120,6 +120,8 @@ Extended ACLs enforce departmental access policies at the Layer 3 routing bounda
 | Students (VLAN 10) | Library (VLAN 30) | ✅ Allowed |
 | Faculty (VLAN 20) | Library (VLAN 30) | ✅ Allowed |
 
+Purpose: Faculty-to-Student traffic is intentionally permitted because in a campus environment, teachers and IT staff need to monitor, manage, and troubleshoot student devices. The restriction is one-directional — students are denied access to faculty systems to protect sensitive academic resources.
+
 ### 9. 🔐 SSH Version 2
 All switches are remotely managed via **SSHv2**, providing encrypted authentication and session traffic — Telnet was explicitly disabled.
 
