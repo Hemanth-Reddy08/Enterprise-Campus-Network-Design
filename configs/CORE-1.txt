@@ -1,0 +1,187 @@
+Building configuration...
+
+Current configuration : 2936 bytes
+!
+version 12.2(37)SE1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname core1
+!
+!
+!
+ip dhcp excluded-address 10.10.10.1 10.10.10.20
+ip dhcp excluded-address 10.20.20.1 10.20.20.20
+ip dhcp excluded-address 10.30.30.1 10.30.30.20
+!
+ip dhcp pool VLAN10
+ network 10.10.10.0 255.255.255.0
+ default-router 10.10.10.254
+ dns-server 8.8.8.8
+ip dhcp pool VLAN20
+ network 10.20.20.0 255.255.255.0
+ default-router 10.20.20.254
+ dns-server 8.8.8.8
+ip dhcp pool VLAN30
+ network 10.30.30.0 255.255.255.0
+ default-router 10.30.30.254
+ dns-server 8.8.8.8
+!
+!
+ip routing
+!
+!
+!
+!
+username admin secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+ip domain-name campus.local
+!
+!
+spanning-tree mode pvst
+spanning-tree vlan 10,20,30 priority 24576
+!
+!
+!
+!
+!
+!
+interface Port-channel1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/1
+!
+interface FastEthernet0/2
+!
+interface FastEthernet0/3
+!
+interface FastEthernet0/4
+!
+interface FastEthernet0/5
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface GigabitEthernet0/2
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ mac-address 0001.63b2.9501
+ ip address 10.10.10.1 255.255.255.0
+ ip access-group STUDENTS_BLOCK in
+ standby version 2
+ standby 10 ip 10.10.10.254
+ standby 10 priority 110
+ standby 10 preempt
+!
+interface Vlan20
+ mac-address 0001.63b2.9502
+ ip address 10.20.20.1 255.255.255.0
+ standby version 2
+ standby 20 ip 10.20.20.254
+ standby 20 priority 110
+ standby 20 preempt
+!
+interface Vlan30
+ mac-address 0001.63b2.9503
+ ip address 10.30.30.1 255.255.255.0
+ standby version 2
+ standby 30 ip 10.30.30.254
+ standby 30 priority 110
+ standby 30 preempt
+!
+interface Vlan99
+ mac-address 0001.63b2.9504
+ ip address 10.99.99.1 255.255.255.0
+ standby version 2
+ standby 99 ip 10.99.99.254
+ standby 99 priority 110
+ standby 99 preempt
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+ip access-list extended STUDENTS_BLOCK
+ deny ip 10.10.10.0 0.0.0.255 10.20.20.0 0.0.0.255
+ permit ip any any
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login local
+ transport input ssh
+!
+!
+!
+!
+end
