@@ -25,7 +25,6 @@ The simulation models a real campus environment where three departments — **St
 
 ## 🗺️ Network Topology
 
-```
  ![Topology](screenshots/Topology.png) 
 ```
 
